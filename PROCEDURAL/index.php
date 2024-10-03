@@ -1,5 +1,5 @@
 <?php
-include("database.php");
+include("include/database.php");
 ?>
 
 <!DOCTYPE html>
@@ -8,8 +8,9 @@ include("database.php");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="index.css">
+    <title>View Data</title>
+    <link rel="icon" href="assets/edit.svg">
+    <link rel="stylesheet" href="styles/index.css">
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
@@ -55,8 +56,8 @@ include("database.php");
                         <td><?php echo $row['age'] ?></td>
                         <td><?php echo $row['gender'] ?></td>
                         <td>
-                            <a href="update.php?id=<?php echo $row['id'] ?>"><img style="width: 12%; height:auto;" src="edit.svg" alt=""></a>
-                            <a href="delete.php?id=<?php echo $row['id'] ?>"><img style="width: 12%; height:auto;" src="delete.svg" alt=""></a>
+                            <a href="update.php?id=<?php echo $row['id'] ?>"><img style="width: 12%; height:auto;" src="assets/edit.svg" alt=""></a>
+                            <a href="delete.php?id=<?php echo $row['id'] ?>"><img style="width: 12%; height:auto;" src="assets/delete.svg" alt=""></a>
                         </td>
                     </tr>
                 <?php
@@ -65,9 +66,6 @@ include("database.php");
 
             </tbody>
         </table>
-        <div>
-            jahdfjaheihdnfkawehhdkfahd
-        </div>
 
     </section>
 </body>
