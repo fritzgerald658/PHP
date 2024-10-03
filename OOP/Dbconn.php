@@ -8,7 +8,7 @@ class Database
     private $dbname;
     private $conn;
 
-    private function __construct($host, $username, $password, $dbname)
+    public function __construct($host, $username, $password, $dbname)
     {
         $this->host = $host;
         $this->username = $username;
@@ -20,5 +20,11 @@ class Database
     private function connect()
     {
         $this->conn = new mysqli($this->host, $this->username, $this->password, $this->dbname);
+
+        if ($this->conn->connect_error) {
+            die("Connection error");
+        } else {
+            echo "Connection succesful";
+        }
     }
 }
