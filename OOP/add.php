@@ -13,10 +13,10 @@ if (isset($_POST['submit'])) {
     $age = $_POST['age'];
     $gender = $_POST['gender'];
 
-    $addUser = new UserData();
-    $addUser->addUser($first_name, $last_name, $email_address, $home_address, $age, $gender);
-}
 
+    $addUser = new UserData($first_name, $last_name, $email_address, $home_address, $age, $gender);
+    $addUser->addUser();
+}
 ?>
 
 

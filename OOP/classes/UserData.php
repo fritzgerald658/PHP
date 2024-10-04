@@ -14,7 +14,7 @@ class UserData extends Database
     private $age;
     private $gender;
 
-    public function addUser($first_name, $last_name, $email_address, $home_address, $age, $gender)
+    public function __construct($first_name, $last_name, $email_address, $home_address, $age, $gender)
     {
         $this->first_name = $first_name;
         $this->last_name = $last_name;
@@ -22,6 +22,12 @@ class UserData extends Database
         $this->home_address = $home_address;
         $this->age = $age;
         $this->gender = $gender;
+        $this->addUser();
+    }
+
+    public function addUser()
+    {
+
 
         $query = "INSERT INTO user_registration (first_name,last_name,email_address,home_address,age,gender)
         VALUES (?,?,?,?,?,?);";
@@ -48,6 +54,3 @@ class UserData extends Database
         return $result;
     }
 }
-
-$test = new UserData();
-$test->addUser('Fritz', 'Castillo', 'example@gmail.com', 'Iba', '21', 'Male');
