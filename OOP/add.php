@@ -2,19 +2,19 @@
 <html lang="en">
 <?php
 
-require_once("classes/Database.php");
+
 require_once("classes/UserData.php");
 
 if (isset($_POST['submit'])) {
     $first_name = $_POST['first_name'];
     $last_name = $_POST['last_name'];
     $email_address = $_POST['email_address'];
-    $address = $_POST['address'];
+    $home_address = $_POST['home_address'];
     $age = $_POST['age'];
     $gender = $_POST['gender'];
 
-    $user_data = new UserData($first_name, $last_name, $email_address, $address, $age, $gender);
-    $user_data->addUser();
+    $addUser = new UserData();
+    $addUser->addUser($first_name, $last_name, $email_address, $home_address, $age, $gender);
 }
 
 ?>
@@ -25,7 +25,7 @@ if (isset($_POST['submit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Data</title>
     <link rel="icon" href="assets/edit.svg">
-    <link rel="stylesheet" href="styles/addUser.css">
+    <link rel="stylesheet" href="styles/styles/addUser.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
@@ -53,8 +53,8 @@ if (isset($_POST['submit'])) {
                         <input name="email_address" class="px-3 py-1" type="email" placeholder="example@gmail.com">
                     </div>
                     <div class="content">
-                        <label for="address">Address</label>
-                        <input name="address" class="px-3 py-1" type="text" placeholder="e.g Zambales">
+                        <label for="home_address">Address</label>
+                        <input name="home_address" class="px-3 py-1" type="text" placeholder="e.g Zambales">
                     </div>
                 </div>
                 <div class="col-6">

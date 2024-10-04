@@ -2,20 +2,26 @@
 
 class Database
 {
-    private $host;
-    private $username;
-    private $password;
-    private $dbname;
+    private $host = "localhost";
+    private $username = "root";
+    private $password = "";
+    private $dbname = "crudphp";
     private $conn;
 
-    public function __construct($host, $username, $password, $dbname)
+
+
+    public function __construct()
     {
-        $this->host = $host;
-        $this->username = $username;
-        $this->password = $password;
-        $this->dbname = $dbname;
+
         $this->connect();
     }
+
+    // public function dbconn($host, $username, $password, $dbname)
+    // {
+    //     
+
+    //     return ;
+    // }
 
     public function connect()
     {
@@ -30,11 +36,3 @@ class Database
         return $this->conn;
     }
 }
-$host = "localhost";
-$username = "root";
-$password = "";
-$dbname = "crudphp";
-$conn = '';
-
-
-$db = new Database($host, $username, $password, $dbname);
