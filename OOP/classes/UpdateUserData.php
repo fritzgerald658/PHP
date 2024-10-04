@@ -46,9 +46,17 @@ class UpdateUserData extends Database
         $sql = "SELECT * FROM user_registration WHERE id = ? LIMIT 1";
         $stmt = parent::connect()->prepare($sql);
         $stmt->bind_param(
-            1,
-            $this->id
+            "i",
+            $id
         );
         $stmt->execute();
+
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            return $result->fetch_assoc();
+        } else {
+            return null;
+        }
     }
 }

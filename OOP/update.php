@@ -4,9 +4,12 @@
 <?php
 include("classes/UpdateUserData.php");
 
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-}
+
+$id = $_GET['id'];
+
+$user_update_data = new UpdateUserData("", "", "", "", "", "", $id);
+$row = $user_update_data->retainFormValues($id);
+
 
 if (isset($_POST['submit'])) {
 
@@ -25,6 +28,8 @@ if (isset($_POST['submit'])) {
         exit();
     }
 }
+
+
 ?>
 
 <head>
@@ -54,29 +59,29 @@ if (isset($_POST['submit'])) {
                     <div class="content">
                         <label for="first_name">First Name</label>
                         <input name="first_name" class="px-3 py-1" type="text" placeholder="e.g Juan"
-                            value="">
+                            value="<?php echo htmlspecialchars($row['first_name']) ?>">
                     </div>
                     <div class="content">
                         <label for="email_address">Email Address</label>
                         <input name="email_address" class="px-3 py-1" type="email" placeholder="example@gmail.com"
-                            value="">
+                            value="<?php echo htmlspecialchars($row['email_address']) ?>">
                     </div>
                     <div class="content">
                         <label for="home_address">Address</label>
                         <input name="home_address" class="px-3 py-1" type="text" placeholder="e.g Zambales"
-                            value="">
+                            value="<?php echo htmlspecialchars($row['home_address']) ?>">
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="content">
                         <label for="last_name">Last Name</label>
                         <input name="last_name" class="px-3 py-1" type="text" placeholder="e.g Cruz"
-                            value="">
+                            value="<?php echo htmlspecialchars($row['last_name']) ?>">
                     </div>
                     <div class="content">
                         <label for="age">Age</label>
                         <input name="age" class="px-3 py-1" type="number" placeholder="18"
-                            value="">
+                            value="<?php echo htmlspecialchars($row['age']) ?>">
                     </div>
                     <div class="radio-content">
                         <fieldset>
@@ -84,12 +89,12 @@ if (isset($_POST['submit'])) {
                             <div class="container d-flex gap-5">
                                 <div class="form-check">
                                     <input type="radio" id="male" name="gender" class="form-check-input"
-                                        value="Male" required>
+                                        value="Male" <?php echo ($row['gender'] == 'Male') ? 'checked' : ''; ?> required>
                                     <label for="male" class="form-check-label">Male</label>
                                 </div>
                                 <div class="form-check">
                                     <input type="radio" id="female" name="gender" class="form-check-input"
-                                        value="Female" required>
+                                        value="Female" <?php echo ($row['gender'] == 'Female') ? 'checked' : ''; ?> required>
                                     <label for="female" class="form-check-label">Female</label>
                                 </div>
                             </div>
