@@ -17,7 +17,7 @@ class Database
         $this->connect();
     }
 
-    private function connect()
+    public function connect()
     {
         $this->conn = new mysqli($this->host, $this->username, $this->password, $this->dbname);
 
@@ -26,5 +26,15 @@ class Database
         } else {
             echo "Connection succesful";
         }
+
+        return $this->conn;
     }
 }
+$host = "localhost";
+$username = "root";
+$password = "";
+$dbname = "crudphp";
+$conn = '';
+
+
+$db = new Database($host, $username, $password, $dbname);
