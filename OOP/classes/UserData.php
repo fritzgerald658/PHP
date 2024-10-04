@@ -22,7 +22,6 @@ class UserData extends Database
         $this->home_address = $home_address;
         $this->age = $age;
         $this->gender = $gender;
-        $this->addUser();
     }
 
     public function addUser()

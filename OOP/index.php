@@ -1,9 +1,12 @@
-<?php
-include("include/database.php");
-?>
-
 <!DOCTYPE html>
 <html lang="en">
+
+<?php
+include("classes/GetUserData.php");
+
+$userData = new GetUserData();
+$result = $userData->getUser();
+?>
 
 <head>
     <meta charset="UTF-8">
@@ -28,43 +31,67 @@ include("include/database.php");
         <div class="container d-flex justify-content-end">
             <a href="add.php" class="text-right add-user text-decoration-none p-4 py-2 bg-black text-white"><i class="fa-solid fa-plus p-2"></i>Add new user</a>
         </div>
-        <table class="table mt-5">
+
+        <?php
+        function displayUserData($result)
+        {
+            if ($result && $result->num_rows > 0) {
+                echo "<table class='table mt-5'>
+                     <thead>
+                         <tr>
+                             <th scope='col'>ID</th>
+                             <th scope='col'>First Name</th>
+                             <th scope='col'>Last Name</th>
+                             <th scope='col'>Email</th>
+                             <th scope='col'>Address</th>
+                             <th scope='col'>Age</th>
+                             <th scope='col'>Gender</th>
+                             <th scope='col'></th>
+                         </tr>
+                     </thead>
+                     <tbody>";
+
+                while ($row = $result->fetch_assoc()) {
+                    echo "<tr>
+                         <td>{$row['id']}</td>
+                         <td>{$row['first_name']}</td>
+                         <td>{$row['last_name']}</td>
+                         <td>{$row['email_address']}</td>
+                         <td>{$row['home_address']}</td>
+                         <td>{$row['age']}</td>
+                         <td>{$row['gender']}</td>
+                         <td>
+                             <a href='update.php?id={$row['id']}'><img style='width: 12%; height:auto;' src='assets/edit.svg' alt='Edit'></a>
+                             <a href='delete.php?id={$row['id']}'><img style='width: 12%; height:auto;' src='assets/delete.svg' alt='Delete'></a>
+                         </td>
+                     </tr>";
+                }
+
+                echo "</tbody></table>";
+            } else {
+                echo " <table class='table mt-5'>
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">Age</th>
-                    <th scope="col">Gender</th>
-                    <th scope="col"></th>
+                    <th scope='col'>ID</th>
+                    <th scope='col'>First Name</th>
+                    <th scope='col'>Last Name</th>
+                    <th scope='col'>Email</th>
+                    <th scope='col'>Address</th>
+                    <th scope='col'>Age</th>
+                    <th scope='col'>Gender</th>
+                    <th scope='col'></th>
                 </tr>
             </thead>
-            <tbody>
-                <?php
-                $sql = "SELECT * FROM `user_registration`";
-                $result = mysqli_query($conn, $sql);
-                while ($row = mysqli_fetch_assoc($result)) {
-                ?>
-                    <tr>
-                        <td><?php echo $row['id'] ?></td>
-                        <td><?php echo $row['first_name'] ?></td>
-                        <td><?php echo $row['last_name'] ?></td>
-                        <td><?php echo $row['email_address'] ?></td>
-                        <td><?php echo $row['address'] ?></td>
-                        <td><?php echo $row['age'] ?></td>
-                        <td><?php echo $row['gender'] ?></td>
-                        <td>
-                            <a href="update.php?id=<?php echo $row['id'] ?>"><img style="width: 12%; height:auto;" src="assets/edit.svg" alt=""></a>
-                            <a href="delete.php?id=<?php echo $row['id'] ?>"><img style="width: 12%; height:auto;" src="assets/delete.svg" alt=""></a>
-                        </td>
-                    </tr>
-                <?php
-                }
-                ?>
+            <tbody>";
+            }
+        }
+        //call the function
+        displayUserData($result);
+        ?>
 
-            </tbody>
+
+
+
         </table>
 
     </section>

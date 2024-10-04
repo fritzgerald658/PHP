@@ -16,22 +16,16 @@ class Database
         $this->connect();
     }
 
-    // public function dbconn($host, $username, $password, $dbname)
-    // {
-    //     
-
-    //     return ;
-    // }
 
     public function connect()
     {
         $this->conn = new mysqli($this->host, $this->username, $this->password, $this->dbname);
 
-        if ($this->conn->connect_error) {
-            die("Connection error");
-        } else {
-            echo "Connection succesful";
-        }
+        // if ($this->conn->connect_error) {
+        //     die("Connection error");
+        // } else {
+        //     echo "Connection succesful";
+        // }
 
         return $this->conn;
     }
