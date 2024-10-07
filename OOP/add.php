@@ -24,7 +24,7 @@ if (isset($_POST['submit'])) {
 
     if (!empty($errors)) {
         foreach ($errors as $error) {
-            $error_msg .= "$error";
+            $error_msg .= "$error <br>";
         }
     } else {
         $add_user = new UserData($first_name, $last_name, $email_address, $home_address, $age, $gender);
@@ -88,7 +88,7 @@ if (isset($_POST['submit'])) {
                     </div>
                     <div class="content">
                         <label for="age">Age</label>
-                        <input name="age" class="px-3 py-1" type="number" min="13" placeholder="18">
+                        <input name="age" class="px-3 py-1" type="number" min="18" placeholder="18">
                     </div>
                     <div class="radio-content">
                         <fieldset>

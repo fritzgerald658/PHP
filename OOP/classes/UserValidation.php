@@ -56,6 +56,7 @@ class UserValidation
 
     public function ageValidation($age)
     {
+
         $errors = [];
         // validation for age
         if (empty($age)) {
@@ -76,7 +77,7 @@ class UserValidation
 
         $errors = [];
 
-        if (!empty($gender)) {
+        if (empty($gender)) {
             $errors[] = "Gender is required";
         }
 

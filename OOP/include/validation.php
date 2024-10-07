@@ -40,13 +40,13 @@ function emailAddressValidation($email_address)
     return $errors;
 }
 
-function addressValidation($address)
+function addressValidation($home_address)
 {
     $errors = [];
     // validation for address
-    if (empty($address)) {
+    if (empty($home_address)) {
         $errors[] = "Address is required";
-    } else if (preg_match("/[0-9]/", $address)) {
+    } else if (preg_match("/[0-9]/", $home_address)) {
         $errors[] = "Address should not consist only of numbers";
     }
     return $errors;
@@ -68,11 +68,23 @@ function ageValidation($age)
     return $errors;
 }
 
-function allFieldsValidation($first_name, $last_name, $email_address, $age, $address, $gender)
+
+function genderValidation($gender)
+{
+
+    $errors = [];
+
+    if (empty($gender)) {
+        $errors[] = "Gender is required";
+    }
+
+    return $errors;
+}
+function allFieldsValidation($first_name, $last_name, $email_address, $age, $home_address, $gender)
 {
     $errors = [];
     if (
-        empty($first_name) || empty($last_name) || empty($email_address) || empty($address)
+        empty($first_name) || empty($last_name) || empty($email_address) || empty($home_address)
         || empty($age) || empty($gender)
     ) {
         $errors[] = "All fields are required";

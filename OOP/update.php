@@ -3,16 +3,17 @@
 
 <?php
 include("classes/UpdateUserData.php");
-
+include("include/validation.php");
+require_once("classes/UserValidation.php");
 
 $id = $_GET['id'];
-
+//form validation error message
+$error_msg = "";
 $user_update_data = new UpdateUserData("", "", "", "", "", "", $id);
 $row = $user_update_data->retainFormValues($id);
 
 
 if (isset($_POST['submit'])) {
-
     $first_name = $_POST['first_name'];
     $last_name = $_POST['last_name'];
     $email_address = $_POST['email_address'];
@@ -20,12 +21,30 @@ if (isset($_POST['submit'])) {
     $age = $_POST['age'];
     $gender = $_POST['gender'];
 
-    $update_user = new UpdateUserData($first_name, $last_name, $email_address, $home_address, $age, $gender, $id);
-    if ($update_user->updateUserData()) {
-        echo "Error";
+
+    // $form_validation = new UserValidation();
+    // $errors = $form_validation->userValidation($first_name, $last_name, $email_address, $home_address, $age, $gender);
+
+    $errors = [];
+    $errors = array_merge($errors, firstNameValidation($first_name));
+    $errors = array_merge($errors, lastNameValidation(last_name: $last_name));
+    $errors = array_merge($errors, emailAddressValidation($email_address));
+    $errors = array_merge($errors, ageValidation($age));
+    $errors = array_merge($errors, addressValidation($home_address));
+    $errors = array_merge($errors, genderValidation($gender));
+
+    if (!empty($errors)) {
+        foreach ($errors as $error) {
+            $error_msg .= "$error <br>";
+        }
     } else {
-        header("Location: index.php");
-        exit();
+        $update_user = new UpdateUserData($first_name, $last_name, $email_address, $home_address, $age, $gender, $id);
+        if ($update_user->updateUserData()) {
+            echo "Error";
+        } else {
+            header("Location: index.php");
+            exit();
+        }
     }
 }
 
@@ -49,7 +68,14 @@ if (isset($_POST['submit'])) {
 <body class="d-flex justify-content-center align-items-center">
 
     <section class="forms-container py-5">
-
+        <?php
+        if (!empty($error_msg)) {
+            echo "<div class='alert alert-warning alert-dismissible fade show' role='alert'>
+                $error_msg
+                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                </div>";
+        }
+        ?>
         <header class="d-flex justify-content-center">
             <h2>Update</h2>
         </header>
@@ -69,7 +95,7 @@ if (isset($_POST['submit'])) {
                     <div class="content">
                         <label for="home_address">Address</label>
                         <input name="home_address" class="px-3 py-1" type="text" placeholder="e.g Zambales"
-                            value="<?php echo htmlspecialchars($row['home_address']) ?>">
+                            value="<?php echo $row['home_address'] ?>">
                     </div>
                 </div>
                 <div class="col-6">
@@ -81,7 +107,7 @@ if (isset($_POST['submit'])) {
                     <div class="content">
                         <label for="age">Age</label>
                         <input name="age" class="px-3 py-1" type="number" placeholder="18"
-                            value="<?php echo htmlspecialchars($row['age']) ?>">
+                            value="<?php echo $row['age'] ?>">
                     </div>
                     <div class="radio-content">
                         <fieldset>

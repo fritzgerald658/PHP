@@ -3,14 +3,14 @@
 include "Database.php";
 class UpdateUserData extends Database
 {
-    private $id;
+
     private $first_name;
     private $last_name;
     private $email_address;
     private $home_address;
     private $age;
     private $gender;
-
+    private $id;
 
     public function __construct($first_name, $last_name, $email_address, $home_address, $age, $gender, $id)
     {
@@ -39,6 +39,7 @@ class UpdateUserData extends Database
         );
 
         $stmt->execute();
+        $stmt->close();
     }
 
     public function retainFormValues($id)
