@@ -15,13 +15,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password_check = $user_registration->passwordRepeat();
 
     // form validation
-    if (!$empty_check['result']) {
+    if (!$empty_check['result']) { // check for empty inputs
         $message = $empty_check['message'];
         header('Location: ../userRegistration.php?msg=' . urlencode($message));
         exit();
-    } else if (!$username_check['result']) {
-        $message = $username_check['message']
-    } else if (!$password_check['result']) {
+    } else if (!$username_check['result']) { // check if the username already exist
+        $message = $username_check['message'];
+        header('Location: ../userRegistration.php?msg=' . urlencode($message));
+        exit();
+    } else if (!$password_check['result']) { // check if both password fields contains the same value
         $message = $password_check['message'];
         header('Location: ../userRegistration.php?msg=' . urlencode($message));
         exit();

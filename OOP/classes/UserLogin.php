@@ -66,7 +66,7 @@ class UserLogin extends Database
         $message = '';
         $result = true;
 
-        $sql = "SELECT FROM user_login WHERE username = ? LIMIT 1";
+        $sql = "SELECT * FROM user_login WHERE username = ? LIMIT 1";
         $stmt = parent::connect()->prepare($sql);
 
         if (!$stmt) {
@@ -78,12 +78,10 @@ class UserLogin extends Database
 
         $result_set = $stmt->get_result();
 
-        if ($result_set > 0) {
+        if ($result_set->num_rows > 0) {
             $result = false;
             $message = "Username already exist";
         }
-
-        $stmt->close();
 
         return [
             'result' => $result,
