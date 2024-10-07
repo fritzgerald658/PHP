@@ -7,15 +7,12 @@ class UserLogin extends Database
     private $password;
     private $password_repeat;
 
-    public function __construct($username, $password, $password_repeat)
+    public function userRegistration($username, $password, $password_repeat)
     {
         $this->username = $username;
         $this->password = $password;
         $this->password_repeat = $password_repeat;
-    }
 
-    public function userRegistration()
-    {
         $password_hash = password_hash($this->password, PASSWORD_DEFAULT);
 
         $sql = "INSERT INTO user_login (username, password) VALUES (?,?);";
@@ -26,7 +23,11 @@ class UserLogin extends Database
             $password_hash
         );
 
-        $stmt->execute();
+        if ($stmt->execute()) {
+            return true; // Registration successful
+        } else {
+            return false; // Registration failed
+        }
     }
 
     // this will handle the login function of the app
@@ -44,20 +45,22 @@ class UserLogin extends Database
             $user = $result->fetch_assoc();
 
             if (password_verify($username, $password)) {
+
                 session_start();
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['username'] = $user['username'];
                 return true;
             }
         }
+        return false;
     }
 
     // form validation or error handling
-    public function emptyInput()
+    public function emptyInput($username, $password, $password_repeat)
     {
         $message = '';
         $result = true;
-        if (empty($this->username) || empty($this->password) || empty($this->password_repeat)) {
+        if (empty($username) || empty($password) || empty($password_repeat)) {
             $result = false;
             $message = "All input fields are required.";
         }
@@ -68,11 +71,11 @@ class UserLogin extends Database
         ];
     }
 
-    public function passwordRepeat()
+    public function passwordRepeat($password, $password_repeat)
     {
         $message = '';
         $result = true;
-        if ($this->password !== $this->password_repeat) {
+        if ($password !== $password_repeat) {
             $result = false;
             $message = "Password do not match";
         }
@@ -84,7 +87,7 @@ class UserLogin extends Database
     }
 
     // validation for username 
-    public function usernameValidation()
+    public function usernameValidation($username)
     {
         $message = '';
         $result = true;
@@ -96,7 +99,7 @@ class UserLogin extends Database
             die("SQL ERROR " . parent::connect()->error);
         }
 
-        $stmt->bind_param("s", $this->username);
+        $stmt->bind_param("s", $username);
         $stmt->execute();
 
         $result_set = $stmt->get_result();
