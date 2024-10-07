@@ -26,11 +26,13 @@ class UserData extends Database
 
     public function addUser()
     {
-
-
         $query = "INSERT INTO user_registration (first_name,last_name,email_address,home_address,age,gender)
         VALUES (?,?,?,?,?,?);";
         $stmt = parent::connect()->prepare($query);
+        if (!$stmt) {
+            die("Preparation failed" . parent::connect()->error);
+        }
+
         $stmt->bind_param(
             "ssssis",
             $this->first_name,
@@ -38,15 +40,9 @@ class UserData extends Database
             $this->email_address,
             $this->home_address,
             $this->age,
-            $this->gender,
+            $this->gender
         );
 
-        // $stmt->bind_param(':first_name', $this->first_name);
-        // $stmt->bind_param(':last_name', $this->last_name);
-        // $stmt->bind_param(':email_address', $this->email_address);
-        // $stmt->bind_param(':home_address', $this->home_address);
-        // $stmt->bind_param(':age', $this->age);
-        // $stmt->bind_param(':gender', $this->gender);
 
         $result = $stmt->execute();
         $stmt->close();

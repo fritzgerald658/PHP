@@ -4,6 +4,10 @@
 
 
 require_once("classes/UserData.php");
+require_once("classes/UserValidation.php");
+
+//validation error message variable
+$error_msg = "";
 
 if (isset($_POST['submit'])) {
     $first_name = $_POST['first_name'];
@@ -14,10 +18,19 @@ if (isset($_POST['submit'])) {
     $gender = $_POST['gender'];
 
 
-    $addUser = new UserData($first_name, $last_name, $email_address, $home_address, $age, $gender);
+    // form validation
+    $form_validation = new UserValidation();
+    $errors = $form_validation->userValidation($first_name, $last_name, $email_address, $age, $home_address, $gender);
 
-    if ($addUser->addUser()) {
-        header("Location: index.php");
+    if (!empty($errors)) {
+        foreach ($errors as $error) {
+            $error_msg .= "$error";
+        }
+    } else {
+        $add_user = new UserData($first_name, $last_name, $email_address, $home_address, $age, $gender);
+        if ($add_user->addUser()) {
+            header("Location: index.php");
+        }
     }
 }
 ?>
@@ -41,6 +54,14 @@ if (isset($_POST['submit'])) {
 <body class="d-flex justify-content-center flex-column align-items-center">
 
     <section class="forms-container py-5">
+        <?php
+        if (!empty($error_msg)) {
+            echo "<div class='alert alert-warning alert-dismissible fade show' role='alert'>
+                $error_msg
+                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                </div>";
+        }
+        ?>
         <header class="d-flex justify-content-center">
             <h2>Registration</h2>
         </header>
