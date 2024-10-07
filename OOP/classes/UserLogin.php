@@ -29,6 +29,29 @@ class UserLogin extends Database
         $stmt->execute();
     }
 
+    // this will handle the login function of the app
+    public function userLogin($username, $password)
+    {
+        $sql = "SELECT * FROM user_login WHERE username = ?";
+        $stmt = parent::connect()->prepare($sql);
+        $stmt->bind_param(
+            "s",
+            $username
+        );
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            $user = $result->fetch_assoc();
+
+            if (password_verify($username, $password)) {
+                session_start();
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['username'] = $user['username'];
+                return true;
+            }
+        }
+    }
+
     // form validation or error handling
     public function emptyInput()
     {
