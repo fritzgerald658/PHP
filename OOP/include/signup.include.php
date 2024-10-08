@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $empty_check = $user_validation->emptyInput($username, $password, $password_repeat);
     if (!$empty_check['result']) {
         $message = $empty_check['message'];
-        header('Location: ../userRegistration.php?msg=' . urlencode($message));
+        header('Location: ../userRegistration.php?msg=' . urlencode($message) . '&username=' . urlencode($username));
         exit();
     }
 
@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username_exist = $user_registration->usernameExistValidation($username);
     if (!$username_exist['result']) {
         $message = $username_exist['message'];
-        header('Location: ../userRegistration.php?msg=' . urlencode($message));
+        header('Location: ../userRegistration.php?msg=' . urlencode($message) . '&username=' . urlencode($username));
         exit();
     }
 
@@ -30,24 +30,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username_check = $user_registration->usernameFoulCharacters($username);
     if (!$username_check['result']) {
         $message = $username_check['message'];
-        header('Location: ../userRegistration.php?msg=' . urlencode($message));
+        header('Location: ../userRegistration.php?msg=' . urlencode($message) . '&username=' . urlencode($username));
         exit();
     }
 
     // check if the password has atleast 8 characters long
-    $password_requirements = $user_validation->passwordRequirements($password);
+    $password_requirements = $user_validation->passwordRequirements($password, $username);
     if (!$password_requirements['result']) {
         $message = $password_requirements['message'];
-        header('Location: ../userRegistration.php?msg=' . urlencode($message));
+        header('Location: ../userRegistration.php?msg=' . urlencode($message) . '&username=' . urlencode($username));
         exit();
     }
 
 
     // check if the password have the same values
-    $password_check = $user_validation->passwordRepeat($password, $password_repeat);
+    $password_check = $user_validation->passwordRepeat($password, $password_repeat, $username);
     if (!$password_check['result']) { // check if both password fields contains the same value
         $message = $password_check['message'];
-        header('Location: ../userRegistration.php?msg=' . urlencode($message));
+        header('Location: ../userRegistration.php?msg=' . urlencode($message) . '&username=' . urlencode($username));
         exit();
     }
 

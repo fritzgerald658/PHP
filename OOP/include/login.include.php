@@ -8,7 +8,7 @@ if (isset($_POST['submit'])) {
 
 
     if (empty($username) || empty($password)) {
-        header('Location: ../login.php?msg=All inputs are required');
+        header('Location: ../login.php?msg=All inputs are required' . '&username=' . urlencode($username));
         exit();
     } else {
         $user_login = new UserLogin();
@@ -18,7 +18,7 @@ if (isset($_POST['submit'])) {
         header("Location: ../dashboard.php");
         exit();
     } else {
-        header('Location: ../login.php?msg=Username or password is incorrect');
+        header('Location: ../login.php?msg=Username or password is incorrect' . '&username=' . urlencode($username));
         exit();
     }
 }

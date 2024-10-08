@@ -38,7 +38,7 @@ include "include/signup.include.php"
                 <div class="col-12 p-0">
                     <div class="content">
                         <label for="username">Username</label>
-                        <input name="username" class="px-3 py-1" type="text" placeholder="Username">
+                        <input name="username" class="px-3 py-1" type="text" placeholder="Username" value="<?php echo isset($_GET['username']) ? htmlspecialchars($_GET['username']) : ""; ?>">
                     </div>
                     <div class="content">
                         <label for="password">Password</label>

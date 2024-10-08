@@ -116,7 +116,7 @@ class UserValidation
         ];
     }
 
-    public function passwordRepeat($password, $password_repeat)
+    public function passwordRepeat($password, $password_repeat, $username)
     {
         $message = '';
         $result = true;
@@ -132,7 +132,7 @@ class UserValidation
     }
 
     // addtional validation for password 
-    public function passwordRequirements($password)
+    public function passwordRequirements($password, $username)
     {
         $message = '';
         $result = true;
