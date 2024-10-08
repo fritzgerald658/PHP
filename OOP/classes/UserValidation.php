@@ -101,11 +101,11 @@ class UserValidation
     }
 
     // form validation or error handling
-    public function emptyInput($username, $password, $password_repeat)
+    public function emptyInput($username, $email, $password, $password_repeat)
     {
         $message = '';
         $result = true;
-        if (empty($username) || empty($password) || empty($password_repeat)) {
+        if (empty($username) || empty($email) || empty($password) || empty($password_repeat)) {
             $result = false;
             $message = "All input fields are required.";
         }

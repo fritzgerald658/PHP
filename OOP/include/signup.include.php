@@ -4,13 +4,16 @@ include __DIR__ . "/../classes/UserLogin.php";
 $error_msg = "";
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
+    $email = $_POST['email'];
     $password = $_POST['password'];
     $password_repeat = $_POST['password-repeat'];
 
     $user_registration = new UserLogin();
     $user_validation = new UserValidation();
+
+
     // check for empty inputs
-    $empty_check = $user_validation->emptyInput($username, $password, $password_repeat);
+    $empty_check = $user_validation->emptyInput($username, $password, $password_repeat, $email);
     if (!$empty_check['result']) {
         $message = $empty_check['message'];
         header('Location: ../userRegistration.php?msg=' . urlencode($message) . '&username=' . urlencode($username));
@@ -34,6 +37,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     }
 
+    // check if the email already exist
+    $email_check = $user_registration->emailExistValidation($email, $username);
+    if (!$email_check['result']) {
+        $message = $email_check['message'];
+        header('Location: ../userRegistration.php?msg=' . urlencode($message) . '&username=' . urlencode($username));
+        exit();
+    }
+
+
     // check if the password has atleast 8 characters long
     $password_requirements = $user_validation->passwordRequirements($password, $username);
     if (!$password_requirements['result']) {
@@ -52,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // if the form has valid inputs
-    $registration_result = $user_registration->userRegistration($username, $password, $password_repeat);
+    $registration_result = $user_registration->userRegistration($username, $email, $password, $password_repeat,);
     if ($registration_result === true) {
         header('Location: ../dashboard.php');
         exit();

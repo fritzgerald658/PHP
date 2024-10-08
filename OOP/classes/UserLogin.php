@@ -5,22 +5,25 @@ include "Database.php";
 class UserLogin extends Database
 {
     private $username;
+    private $email;
     private $password;
     private $password_repeat;
 
-    public function userRegistration($username, $password, $password_repeat)
+    public function userRegistration($username, $email, $password, $password_repeat)
     {
         $this->username = $username;
+        $this->email = $email;
         $this->password = $password;
         $this->password_repeat = $password_repeat;
 
         $password_hash = password_hash($this->password, PASSWORD_DEFAULT);
 
-        $sql = "INSERT INTO user_login (username, password) VALUES (?,?);";
+        $sql = "INSERT INTO user_login (username, email, password) VALUES (?,?,?);";
         $stmt = parent::connect()->prepare($sql);
         $stmt->bind_param(
-            "ss",
+            "sss",
             $this->username,
+            $this->email,
             $password_hash
         );
 
@@ -88,6 +91,35 @@ class UserLogin extends Database
         ];
     }
 
+    //validation if email already exist
+    public function emailExistValidation($email)
+    {
+        $message = '';
+        $result = true;
+
+        $sql = "SELECT * FROM user_login WHERE email = ? LIMIT 1";
+        $stmt = parent::connect()->prepare($sql);
+
+        if (!$stmt) {
+            die("SQL ERROR " . parent::connect()->error);
+        }
+
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+
+        $result_set = $stmt->get_result();
+
+        if ($result_set->num_rows > 0) {
+            $result = false;
+            $message = "Email already exist";
+        }
+
+        return [
+            'result' => $result,
+            'message' => $message
+        ];
+    }
+
     public function usernameFoulCharacters($username)
     {
         $message = '';
@@ -102,5 +134,10 @@ class UserLogin extends Database
             'result' => $result,
             'message' => $message
         ];
+    }
+
+    public function sendNewPassword($password)
+    {
+        $sql = "UPDATE user_login SET password = ? WHERE email = ? ";
     }
 }

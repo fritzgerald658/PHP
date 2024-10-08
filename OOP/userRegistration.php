@@ -41,6 +41,10 @@ include "include/signup.include.php"
                         <input name="username" class="px-3 py-1" type="text" placeholder="Username" value="<?php echo isset($_GET['username']) ? htmlspecialchars($_GET['username']) : ""; ?>">
                     </div>
                     <div class="content">
+                        <label for="email">Email</label>
+                        <input name="email" class="px-3 py-1" type="email" placeholder="Email" value="<?php echo isset($_GET['email']) ? htmlspecialchars($_GET['email']) : ""; ?>">
+                    </div>
+                    <div class="content">
                         <label for="password">Password</label>
                         <input name="password" class="px-3 py-1" type="password" placeholder="Password">
                     </div>

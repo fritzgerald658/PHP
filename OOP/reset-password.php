@@ -38,7 +38,7 @@
         <header class="d-flex justify-content-center">
             <h4>Reset your password</h4>
         </header>
-        <form action="include/forgot-pass.include.php" method="post">
+        <form action="include/new-password.include.php" method="post">
             <div class="row">
                 <div class="col-12 p-0">
                     <div class="content">
