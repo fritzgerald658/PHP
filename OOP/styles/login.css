@@ -1,0 +1,71 @@
+body {
+  height: 80vh;
+}
+
+h6 {
+  font-family: "DM Sans";
+  font-size: 1.8rem;
+  font-weight: 600;
+  background-color: white;
+}
+.forms-container {
+  width: 50vw;
+  margin-top: 15rem;
+  border: 1px solid black;
+}
+
+.forms-container h2 {
+  font-family: "DM Sans";
+  font-size: 1.5rem;
+  font-weight: 600;
+  background-color: white;
+}
+
+/*----styles for input forms----*/
+
+.content label {
+  font-family: "DM Sans";
+  font-weight: 600;
+}
+
+.content input {
+  font-family: "DM Sans";
+  width: 100%;
+  border: 1px solid rgb(196, 196, 196);
+  border-radius: 5px;
+}
+
+.content {
+  margin: 1rem 0rem;
+}
+
+/*---styles for form button */
+
+form #btn-submit {
+  font-family: "DM Sans";
+  font-size: 1rem;
+  font-weight: 400;
+  border: 1px solid black;
+  background-color: black;
+  color: white;
+  width: 100%;
+  border-radius: 2px;
+}
+.forms-container a {
+  font-family: "DM Sans";
+  font-size: 1rem;
+  font-weight: 400;
+  border: 1px solid black;
+  background-color: transparent;
+  color: black;
+  width: 100%;
+  border-radius: 2px;
+}
+
+/*--- login button ---*/
+.login-account {
+  font-family: "DM Sans";
+  font-size: 1rem;
+  font-weight: 500;
+  color: black;
+}

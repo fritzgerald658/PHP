@@ -1,5 +1,7 @@
 <?php
 
+
+
 class UserValidation
 {
     public function firstNameValidation($first_name)
@@ -15,6 +17,8 @@ class UserValidation
         }
         return $errors;
     }
+
+
 
     public function lastNameValidation($last_name)
     {
@@ -94,5 +98,53 @@ class UserValidation
         $errors = array_merge($errors, $this->genderValidation($gender));
 
         return $errors;
+    }
+
+    // form validation or error handling
+    public function emptyInput($username, $password, $password_repeat)
+    {
+        $message = '';
+        $result = true;
+        if (empty($username) || empty($password) || empty($password_repeat)) {
+            $result = false;
+            $message = "All input fields are required.";
+        }
+
+        return [
+            'result' => $result,
+            'message' => $message
+        ];
+    }
+
+    public function passwordRepeat($password, $password_repeat)
+    {
+        $message = '';
+        $result = true;
+        if ($password !== $password_repeat) {
+            $result = false;
+            $message = "Password do not match";
+        }
+
+        return [
+            'result' => $result,
+            'message' => $message
+        ];
+    }
+
+    // addtional validation for password 
+    public function passwordRequirements($password)
+    {
+        $message = '';
+        $result = true;
+
+        if (strlen($password) < 8) {
+            $result = false;
+            $message = "Password must be at least 8 characters.";
+        }
+
+        return [
+            'result' => $result,
+            'message' => $message
+        ];
     }
 }

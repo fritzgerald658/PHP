@@ -20,8 +20,13 @@ section {
   border-radius: 15px;
 }
 
-.add-user:hover {
-  background-color: rgba(109, 109, 109, 0.829);
+.logout-user {
+  font-family: "DM Sans";
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 15px;
+  border: 1px solid black;
+  color: black;
 }
 
 body {

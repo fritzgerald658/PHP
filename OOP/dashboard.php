@@ -13,7 +13,7 @@ $result = $userData->getUser();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Data</title>
     <link rel="icon" href="assets/edit.svg">
-    <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet" href="styles/dashboard.css">
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
@@ -28,8 +28,9 @@ $result = $userData->getUser();
 
 <body>
     <section>
-        <div class="container d-flex justify-content-end">
-            <a href="add.php" class="text-right add-user text-decoration-none p-4 py-2 bg-black text-white"><i class="fa-solid fa-plus p-2"></i>Add new user</a>
+        <div class="container d-flex justify-content-end gap-3">
+            <a href="add.php" class="text-right add-user text-decoration-none p-3 py-1 bg-black text-white"><i class="fa-solid fa-plus p-2"></i>Add new user</a>
+            <a href="login.php" class="logout-user  p-4 py-2 text-center text-decoration-none d-flex align-items-center ">Logout</a>
         </div>
 
         <?php

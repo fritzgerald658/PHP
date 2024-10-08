@@ -1,6 +1,7 @@
 <?php
 
-include("Database.php");
+include "Database.php";
+
 class UserLogin extends Database
 {
     private $username;
@@ -39,12 +40,15 @@ class UserLogin extends Database
             "s",
             $username
         );
+
+        $stmt->execute();
+
         $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
             $user = $result->fetch_assoc();
 
-            if (password_verify($username, $password)) {
+            if (password_verify($password, $user['password'])) {
 
                 session_start();
                 $_SESSION['user_id'] = $user['id'];
@@ -55,39 +59,8 @@ class UserLogin extends Database
         return false;
     }
 
-    // form validation or error handling
-    public function emptyInput($username, $password, $password_repeat)
-    {
-        $message = '';
-        $result = true;
-        if (empty($username) || empty($password) || empty($password_repeat)) {
-            $result = false;
-            $message = "All input fields are required.";
-        }
-
-        return [
-            'result' => $result,
-            'message' => $message
-        ];
-    }
-
-    public function passwordRepeat($password, $password_repeat)
-    {
-        $message = '';
-        $result = true;
-        if ($password !== $password_repeat) {
-            $result = false;
-            $message = "Password do not match";
-        }
-
-        return [
-            'result' => $result,
-            'message' => $message
-        ];
-    }
-
-    // validation for username 
-    public function usernameValidation($username)
+    // validation if username already exist
+    public function usernameExistValidation($username)
     {
         $message = '';
         $result = true;
@@ -107,6 +80,22 @@ class UserLogin extends Database
         if ($result_set->num_rows > 0) {
             $result = false;
             $message = "Username already exist";
+        }
+
+        return [
+            'result' => $result,
+            'message' => $message
+        ];
+    }
+
+    public function usernameFoulCharacters($username)
+    {
+        $message = '';
+        $result = true;
+
+        if (!preg_match('/^[a-zA-Z0-9]+$/', $username)) {
+            $message = "Special characters are not allowed";
+            $result = false;
         }
 
         return [
