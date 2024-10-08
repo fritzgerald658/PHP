@@ -36,24 +36,19 @@
         }
         ?>
         <header class="d-flex justify-content-center">
-            <h4>Login your account</h4>
+            <h4>Email address</h4>
         </header>
-        <form action="include/login.include.php" method="post">
+        <form action="include/send-password-reset.include.php" method="post">
             <div class="row">
                 <div class="col-12 p-0">
                     <div class="content">
-                        <label for="username">Username</label>
-                        <input name="username" class="px-3 py-1" type="text" placeholder="Username" value="<?php echo isset($_GET['username']) ?  htmlspecialchars($_GET['username']) : ""; ?>">
-                    </div>
-                    <div class="content">
-                        <label for="password">Password</label>
-                        <input name="password" class="px-3 py-1" type="password" placeholder="Password">
+                        <label for="email-address">Email Address</label>
+                        <input name="email-address" class="px-3 py-1" type="email" placeholder="Email Address">
                     </div>
                 </div>
-                <div class="container-fluid p-0 d-flex gap-2 flex-column justify-content-center">
-                    <button id="btn-submit" class="py-1" name="submit" type="submit">Login</button>
-                    <p class="my-0">Don't have an account? <a href="userRegistration.php" class="login-account">Register</a></p>
-                    <a href="send-email.php" class="login-account">Forgot password</a>
+                <div class=" container-fluid p-0 d-flex gap-2 flex-column justify-content-center">
+                    <button id="btn-submit" class="py-1" name="submit" type="submit">Send</button>
+                    <a href="login.php" class="login-account">Back to login</a>
                 </div>
         </form>
     </div>

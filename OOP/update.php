@@ -42,7 +42,7 @@ if (isset($_POST['submit'])) {
         if ($update_user->updateUserData()) {
             echo "Error";
         } else {
-            header("Location: index.php");
+            header("Location: dashboard.php");
             exit();
         }
     }

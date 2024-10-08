@@ -29,7 +29,7 @@ if (isset($_POST['submit'])) {
     } else {
         $add_user = new UserData($first_name, $last_name, $email_address, $home_address, $age, $gender);
         if ($add_user->addUser()) {
-            header("Location: index.php");
+            header("Location: dashboard.php");
         }
     }
 }

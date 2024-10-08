@@ -1,6 +1,6 @@
 <?php
 
-include("classes/DeleteUserData.php");
+include __DIR__ . "/../classes/DeleteUserData.php";
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -9,7 +9,7 @@ if (isset($_GET['id'])) {
     if ($delete_user->deleteData($id)) {
         echo "Error";
     } else {
-        header("Location: index.php");
+        header("Location: ../dashboard.php");
         exit();;
     }
 }

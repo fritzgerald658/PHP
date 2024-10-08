@@ -63,7 +63,7 @@ $result = $userData->getUser();
                          <td>{$row['gender']}</td>
                          <td>
                              <a href='update.php?id={$row['id']}'><img style='width: 12%; height:auto;' src='assets/edit.svg' alt='Edit'></a>
-                             <a href='delete.php?id={$row['id']}'><img style='width: 12%; height:auto;' src='assets/delete.svg' alt='Delete'></a>
+                             <a href='include/delete.include.php?id={$row['id']}'><img style='width: 12%; height:auto;' src='assets/delete.svg' alt='Delete'></a>
                          </td>
                      </tr>";
                 }
