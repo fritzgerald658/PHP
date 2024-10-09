@@ -1,11 +1,11 @@
 <?php
 include "Database.php";
+require __DIR__ . "/../vendor/autoload.php";
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-require __DIR__ . "/../vendor/autoload.php";
 class SendPasswordReset extends Database
 {
 
@@ -47,6 +47,7 @@ class SendPasswordReset extends Database
         }
     }
 
+
     public function sendResetEmail()
     {
         // Load PHPMailer classes and try to send the email
@@ -54,7 +55,7 @@ class SendPasswordReset extends Database
 
         try {
             // SMTP configuration
-            $phpmailer->SMTPDebug = SMTP::DEBUG_SERVER; // For detailed debugging
+            //$phpmailer->SMTPDebug = SMTP::DEBUG_SERVER; // For detailed debugging
             $phpmailer->isSMTP();
             $phpmailer->Host = 'sandbox.smtp.mailtrap.io'; // Replace with your SMTP server
             $phpmailer->SMTPAuth = true;
@@ -82,16 +83,16 @@ class SendPasswordReset extends Database
     }
 
     // function for updating new password after forgot password process
-    public function sendNewPassword($new_password)
+    public function sendNewPassword()
     {
-        $password_hash = password_hash($new_password, PASSWORD_DEFAULT);
+        $password_hash = password_hash($this->new_password, PASSWORD_DEFAULT);
 
-        $sql = "UPDATE user_login SET password = ? WHERE email = ? ";
+        $sql = "UPDATE user_login SET password = ? WHERE reset_token_hash = ? ";
         $stmt = parent::connect()->prepare($sql);
         $stmt->bind_param(
             "ss",
             $password_hash,
-            $this->email
+            $this->token_hash
         );
 
         if ($stmt->execute()) {

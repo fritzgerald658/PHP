@@ -3,11 +3,14 @@
 include "../classes/SendPasswordReset.php";
 
 if (isset($_POST['submit'])) {
-    $password = $_POST['password'];
-    $password_repeat = $_POST['password-repeat'];
+    $new_password = $_POST['password'];
+    $password_repeat = $_POST['confirm-password'];
+    $token = $_POST['token'];
 
-    $update_password = new SendPasswordReset("", "", "", $new_password);
-    if ($update_password->sendNewPassword($new_password)) {
+    $update_password = new SendPasswordReset("", $token, "", $new_password);
+    if ($update_password->sendNewPassword()) {
         header("Location: ../login.php");
     }
+} else {
+    echo "Execution error";
 }

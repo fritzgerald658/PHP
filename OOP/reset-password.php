@@ -27,10 +27,10 @@
     <div>
 
         <?php
-        if (isset($_GET['msg'])) {
-            $message = $_GET['msg'];
+        if (isset($_GET['token'])) {
+            $token = $_GET['token'];
             echo "<div class='alert alert-warning alert-dismissible fade show' role='alert'>
-                $message
+                $token
                 <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                 </div>";
         }
@@ -50,6 +50,7 @@
                         <input name="confirm-password" class="px-3 py-1" type="password" placeholder="Confirm password">
                     </div>
                 </div>
+                <input type="hidden" name="token" value="<?php echo htmlspecialchars($token); ?>">
                 <div class="container-fluid p-0 d-flex gap-2 flex-column justify-content-center">
                     <button id="btn-submit" class="py-1" name="submit" type="submit">Reset</button>
                     <a href="login.php" class="forgot-password">Back to login</a>
