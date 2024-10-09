@@ -18,7 +18,7 @@ if (isset($_POST['submit'])) {
         exit();
     } else {
         if ($update_password->sendNewPassword()) {
-            header("Location: ../login.php?msg=Your password has been changed. Login now!");
+            header("Location: ../login.php?success-msg=Your password has been changed. Login now!");
             exit();
         } else {
             echo "Password update error";

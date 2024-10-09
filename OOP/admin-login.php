@@ -30,24 +30,16 @@
         <?php
         if (isset($_GET['msg'])) {
             $message = $_GET['msg'];
-            echo "<div class='alert alert-warning alert-dismissible fade show m-0' role='alert'>
-                $message
-                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-                </div>";
-        }
-
-        if (isset($_GET['success-msg'])) {
-            $message = $_GET['sucess-msg'];
-            echo "<div class='alert alert-warning alert-dismissible fade show m-0' role='alert'>
+            echo "<div class='alert alert-danger alert-dismissible fade show m-0' role='alert'>
                 $message
                 <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                 </div>";
         }
         ?>
         <header class="d-flex justify-content-center">
-            <h4>Login your account</h4>
+            <h4>Admin Login</h4>
         </header>
-        <form action="include/login.include.php" method="post">
+        <form action="include/admin-login.include.php" method="post">
             <div class="row">
                 <div class="col-12 p-0">
                     <div class="content">
@@ -61,8 +53,6 @@
                 </div>
                 <div class="container-fluid p-0 d-flex gap-2 flex-column justify-content-center">
                     <button id="btn-submit" class="py-1" name="submit" type="submit">Login</button>
-                    <p class="my-0">Don't have an account? <a href="userRegistration.php" class="login-account">Register</a></p>
-                    <a href="send-email.php" class="login-account">Forgot password</a>
                 </div>
         </form>
     </div>

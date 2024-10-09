@@ -109,7 +109,7 @@ if (isset($_POST['submit'])) {
             </div>
             <div class="container-fluid p-0 d-flex gap-2 flex-column justify-content-center">
                 <button id="btn-submit" class="py-1 " name="submit" type="submit">Register</button>
-                <a href="index.php" class=" text-decoration-none py-1 text-center">Cancel</a>
+                <a href="data-tables.php" class=" text-decoration-none py-1 text-center">Cancel</a>
             </div>
         </form>
     </section>
