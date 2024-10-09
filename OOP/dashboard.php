@@ -27,6 +27,15 @@ $result = $userData->getUser();
 </style>
 
 <body>
+    <?php
+    if (isset($_GET['msg'])) {
+        $message = $_GET['msg'];
+        echo "<div class='alert alert-success alert-dismissible fade show m-0' role='alert'>
+                $message
+                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                </div>";
+    }
+    ?>
     <section>
         <div class="container d-flex justify-content-end gap-3">
             <a href="add.php" class="text-right add-user text-decoration-none p-3 py-1 bg-black text-white"><i class="fa-solid fa-plus p-2"></i>Add new user</a>
@@ -96,6 +105,7 @@ $result = $userData->getUser();
         </table>
 
     </section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 
 </html>

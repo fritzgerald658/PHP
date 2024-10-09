@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // if the form has valid inputs
     $registration_result = $user_registration->userRegistration($username, $email, $password, $password_repeat,);
     if ($registration_result === true) {
-        header('Location: ../dashboard.php');
+        header('Location: ../dashboard.php?msg=Account succesfully created');
         exit();
     } else {
         die("Error");
