@@ -62,6 +62,12 @@ class UserLogin extends Database
         return false;
     }
 
+    public function userLogout()
+    {
+        session_start();
+        session_destroy();
+    }
+
     // validation if username already exist
     public function usernameExistValidation($username)
     {
