@@ -29,8 +29,13 @@
         <?php
         if (isset($_GET['token'])) {
             $token = $_GET['token'];
+        }
+
+
+        if (isset($_GET['msg'])) {
+            $message = $_GET['msg'];
             echo "<div class='alert alert-warning alert-dismissible fade show' role='alert'>
-                $token
+                $message
                 <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                 </div>";
         }
