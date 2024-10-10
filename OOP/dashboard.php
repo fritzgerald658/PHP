@@ -38,6 +38,12 @@ if (isset($_GET['code'])) {
 }
 
 
+if (!isset($_SESSION['username'])) {
+    header("Location: PHP/OOP/login.php");
+} else {
+    $username = $_SESSION['username'];
+}
+
 if (isset($_GET['error']) && $_GET['error'] === 'access_denied') {
     // The user denied the request, handle this case
     header("Location: http://localhost/PHP/OOP/userRegistration.php?error=You+denied+the+login+request");
@@ -71,7 +77,7 @@ if (isset($_GET['scope'])) {
     <a href="/PHP/OOP/admin-login.php" class="btn btn-primary">Admin Login</a>
     <a href="/PHP/OOP/include/logout.include.php" class="btn btn-primary">Logout</a>
     <section class="d-flex justify-content-center align-items-center">
-        <h1>WELCOME TO <?php echo htmlspecialchars($name) ?></h1>
+        <h1>WELCOME! <?php echo htmlspecialchars($username) ?></h1>
     </section>
 </body>
 

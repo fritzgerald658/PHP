@@ -1,10 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <?php
-include "include/signup.include.php"
+session_start();
+
+include "include/facebook-callback.include.php";
+
+if (isset($_SESSION['login-url'])) {
+    $loginUrl = $_SESSION['login-url'];
+}
 ?>
 
 <?php
+include "include/signup.include.php";
 require_once '/laragon/www/PHP/vendor/autoload.php';
 
 use Google\Client;
@@ -96,6 +104,7 @@ if (isset($_GET['code'])) {
                     <div class="container-fluid p-0 d-flex gap-2 flex-column justify-content-center">
                         <button id="btn-submit" class="py-1" name="submit" type="submit">Register</button>
                         <a href="<?php echo $client->createAuthUrl() ?>" id="btn-submit" class="py-1  text-decoration-none bg-white text-black d-flex align-items-center justify-content-center gap-3" name="submit" type="submit"><i class="fa-brands fa-google"></i>Sign up with Google</a>
+                        <a href="<?php echo htmlspecialchars($loginUrl) ?>" id="btn-submit" class="py-1  text-decoration-none bg-white text-black d-flex align-items-center justify-content-center gap-3" name="submit" type="submit"><i class="fa-brands fa-google"></i>Sign up with Facebook</a>
                         <p>Have an account? <a href="login.php" class=" login-account">Login</a></p>
                     </div>
             </form>
