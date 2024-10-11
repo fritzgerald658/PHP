@@ -1,27 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 
+// this is my dashboard.php file
+
 <?php
-session_start();
 require_once '/laragon/www/PHP/vendor/autoload.php';
 include "include/google-callback.include.php";
-
-if (!isset($_SESSION['username'])) {
-    header("Location: PHP/OOP/login.php");
-} else {
-    $username = $_SESSION['username'];
+if (isset($_SESSION['name'])) {
+    $username = $_SESSION['name'];
+    if (!isset($_SESSION['name'])) {
+        header("Location: login.php");
+    }
 }
-
 if (isset($_GET['error']) && $_GET['error'] === 'access_denied') {
     // The user denied the request, handle this case
     header("Location: http://localhost/PHP/OOP/userRegistration.php?error=You+denied+the+login+request");
     exit();
 }
-
-if (isset($_GET['scope'])) {
-    $scope =  $_GET['scope'];
-}
-
 ?>
 
 <head>

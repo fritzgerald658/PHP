@@ -1,14 +1,14 @@
 <?php
-
+session_start();
 require_once '/laragon/www/PHP/vendor/autoload.php';
 
 use Google\Client;
 use Google\Service\Oauth2 as Google_Service_Oauth2;
 
 // init configuration
-$clientID = '387192750275-7cc6b06ttmt1jd6uod2p85ksl20bf73d.apps.googleusercontent.com';
-$clientSecret = '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';
-$redirectUri = 'http://localhost/PHP/OOP/dashboard.php/';
+$clientID = '937247401940-qetpblmsnovn2ikno1md75nt52dkufrk.apps.googleusercontent.com';
+$clientSecret = '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';
+$redirectUri = 'http://localhost/PHP/OOP/include/google-callback.include.php/';
 
 // create Client Request to access Google API
 $client = new Google_Client();
@@ -30,14 +30,16 @@ if (isset($_GET['code'])) {
     $email =  $google_account_info->email;
     $name =  $google_account_info->name;
 
-    if (isset($_SESSION['username'])) {
-        header("Location: ../dashboard.php");
+    $_SESSION['name'] = $name;
+    if (isset($_SESSION['name'])) {
+        header("Location: ../../dashboard.php");
         exit();
     }
 } else {
     $google_sign_in = $client->createAuthUrl();
 
     if (isset($_SESSION['google_sign_in'])) {
-        header("Location: ../userRegistration");
+        header("Location: ../userRegistration.php");
+        exit();
     }
 }

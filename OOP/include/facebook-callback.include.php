@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once '/laragon/www/PHP/vendor/autoload.php';
 
 use Facebook\Facebook;
@@ -12,8 +11,3 @@ $fb = new Facebook([
 $helper = $fb->getRedirectLoginHelper();
 $permissions = ['email']; // Optional permissions
 $loginUrl = $helper->getLoginUrl('http://localhost/PHP/OOP/dashboard.php/', $permissions);
-
-if (isset($_SESSION['login-url'])) {
-    header("Location: ../userRegistration");
-    exit();
-}
